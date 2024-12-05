@@ -1,2 +1,1 @@
-# go-basic-terminal-tools (For learning purposes)
-Simple versions of common terminal programs on Unix and Linux 
+Simple versions of crypto/math algorithms and related CLI programs
