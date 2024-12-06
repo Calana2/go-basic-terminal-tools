@@ -1,24 +1,44 @@
 package main
 
 import (
-	"fmt"
+	"bufio"
+	"io"
 	"main/lcrypto"
-	"math/big"
+  //"math/big"
+  "os"
 )
 
  func main() {
- // print(lcrypto.GCD(525,231))
- bigun := big.NewInt(2342343253463454)
- factors := lcrypto.Primefact(bigun)
- fmt.Printf("Prime factors of %v: %v\n",bigun,factors)
+ // fmt.Print(lcrypto.GCD(big.NewInt(546234),big.NewInt(4352)))
 
- // Example with 1:
- one := big.NewInt(1)
- factorsOne := lcrypto.Primefact(one)
- fmt.Println("Prime factors of 1:", factorsOne)
+ /*
+  bigun := big.NewInt(2342343253463454)       // takes a while
+  factors := lcrypto.Primefact(bigun)
+  fmt.Printf("Prime factors of %v: %v\n",bigun,factors) 
+ */
 
- // Example with 0:
-    zero := big.NewInt(0)
-    factorsZero := lcrypto.Primefact(zero)
-    fmt.Println("Prime factors of 0:", factorsZero)
+// /*
+ var reader io.Reader
+
+ if len(os.Args) > 2 {
+  os.Exit(1)
+ } else if len(os.Args) == 2 {
+   file,err := os.Open(os.Args[1]) 
+   defer file.Close()
+   reader = file
+  if err != nil {
+   println(err)
+   os.Exit(1)
+  }
+ } else {
+  reader = os.Stdin
+ }
+
+  // pipe 
+  if reader == os.Stdin {
+   lcrypto.Base64Decode(*bufio.NewReader(reader))
+   os.Exit(0)
+  }
+  // Normal input
+  lcrypto.Base64Decode(*bufio.NewReader(reader)); os.Exit(0) 
 }
