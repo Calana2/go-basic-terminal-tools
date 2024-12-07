@@ -1,4 +1,4 @@
-package lcrypto
+package student
 
 import (
 	"bufio"

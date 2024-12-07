@@ -1,44 +1,27 @@
 package main
 
 import (
-	"bufio"
-	"io"
-	"main/lcrypto"
-  //"math/big"
-  "os"
+	"fmt"
+	"main/student"
+	"math/big"
 )
 
- func main() {
- // fmt.Print(lcrypto.GCD(big.NewInt(546234),big.NewInt(4352)))
+func main() {
+    tests := []struct {
+        a, b *big.Int
+    }{
+        {big.NewInt(56), big.NewInt(15)},
+        {big.NewInt(120), big.NewInt(23)},
+        {big.NewInt(101), big.NewInt(10)},
+        {big.NewInt(625), big.NewInt(90)},
+        {big.NewInt(1001), big.NewInt(77)},
+        {big.NewInt(270), big.NewInt(192)},
+    }
 
- /*
-  bigun := big.NewInt(2342343253463454)       // takes a while
-  factors := lcrypto.Primefact(bigun)
-  fmt.Printf("Prime factors of %v: %v\n",bigun,factors) 
- */
-
-// /*
- var reader io.Reader
-
- if len(os.Args) > 2 {
-  os.Exit(1)
- } else if len(os.Args) == 2 {
-   file,err := os.Open(os.Args[1]) 
-   defer file.Close()
-   reader = file
-  if err != nil {
-   println(err)
-   os.Exit(1)
-  }
- } else {
-  reader = os.Stdin
- }
-
-  // pipe 
-  if reader == os.Stdin {
-   lcrypto.Base64Decode(*bufio.NewReader(reader))
-   os.Exit(0)
-  }
-  // Normal input
-  lcrypto.Base64Decode(*bufio.NewReader(reader)); os.Exit(0) 
+    for _, test := range tests {
+        mcd, x, y := student.Extended_Euclides(test.a, test.b)
+        fmt.Printf("MCD(%s, %s) = %s\n", test.a.String(), test.b.String(), mcd.String())
+        fmt.Printf("Coeficientes: x = %s, y = %s\n", x.String(), y.String())
+    }
 }
+
